@@ -1,0 +1,9 @@
+<body>
+<script>
+    var html = '', decode = false;
+    document.write('<script src="' + location.hash.substr(1) + '"><\/script>');
+</script>
+<script>
+    document.body.innerHTML = decode ? decodeURI(html) : html;
+</script>
+</body>
