@@ -1,0 +1,4 @@
+/* 这些是用到的关键字，这样写是防止WebStorm报未知标签或属性名 */
+[template], [template-inner], [prefetch], [list], [list-outer], [hide], [hide-length], [js], [isolate], [scope], [all],
+[nodes], [remote] {
+}
