@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>createCORS</title>
+</head>
+<body>
+<b style="color: crimson">在IE下无效</b>
+<input type="file" accept="text/html" onchange="createCORS(this.files[0])"/>
+<script>
+
+    function createCORS(file) {
+
+        var fr = new FileReader();
+
+        fr.onload = function () {
+
+            var a = document.createElement('a'), code;
+
+            a.download = (prompt('请输入保存的文件名') || 'cors') + '.js';
+
+            try {
+
+                code = 'html = ' + fr.result.split('\r\n').map(function (line) {
+
+                    return "'" + line + "\\r\\n' +";
+
+                }).join('\r\n');
+
+                a.href = 'data:text/plain;base64,' + btoa(code.substr(0, code.length - 2) + ';');
+
+            } catch (e) {
+
+                code = 'html = ' + fr.result.split('\r\n').map(function (line) {
+
+                    return "'" + encodeURI(line + '\r\n') + "' +";
+
+                }).join('\r\n');
+
+                a.href = 'data:text/plain;base64,' + btoa(code.substr(0, code.length - 2) + ';\r\ndecode = true;');
+            }
+
+            a.click();
+        };
+
+        fr.readAsText(file);
+    }
+
+</script>
+</body>
+</html>
